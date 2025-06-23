@@ -3,10 +3,12 @@ package src.main.java.org.example.weatherforecastapp.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 @NoArgsConstructor
 @Getter
+@Setter
 public class DailyDto {
     @JsonProperty("time")
     private List<String> time;
@@ -15,10 +17,10 @@ public class DailyDto {
     private List<Integer> weatherCode;
 
     @JsonProperty("temperature_2m_max")
-    private List<Double> temperatureMax;
+    private List<Integer> temperatureMax;
 
     @JsonProperty("temperature_2m_min")
-    private List<Double> temperatureMin;
+    private List<Integer> temperatureMin;
 
     @JsonProperty("sunshine_duration")
     private List<Double> sunshineDuration;

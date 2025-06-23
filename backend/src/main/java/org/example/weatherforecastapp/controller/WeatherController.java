@@ -1,12 +1,10 @@
 package src.main.java.org.example.weatherforecastapp.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import src.main.java.org.example.weatherforecastapp.dto.WeatherResponseDto;
-import src.main.java.org.example.weatherforecastapp.dto.WeatherResponseV2;
+import src.main.java.org.example.weatherforecastapp.dto.FinalResponseWeather;
+import src.main.java.org.example.weatherforecastapp.dto.firstRequest.WeatherResponseDto;
 import src.main.java.org.example.weatherforecastapp.service.WeatherService;
 
 import java.util.List;
@@ -37,7 +35,7 @@ String test(){
 }
 
  @GetMapping("/hey2")
-    public WeatherResponseV2 getSecondResponse(){
+    public FinalResponseWeather getSecondResponse(){
      return weatherService.getDataV2();
 
  }

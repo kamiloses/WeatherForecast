@@ -16,9 +16,10 @@ public class HourlyDto {//zmienic nazwe na request v2
     @JsonProperty("pressure_msl")
     private List<Double> pressure; //todo zmienić nazwe
 
-//    @JsonProperty("sunshine_duration")
-//    private List<Double> sunshineDuration;
 
+
+    @JsonProperty("sunshine_duration")
+    private List<Double> sunshineDuration;
 
 
 

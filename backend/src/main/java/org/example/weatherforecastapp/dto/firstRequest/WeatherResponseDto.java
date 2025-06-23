@@ -1,4 +1,4 @@
-package src.main.java.org.example.weatherforecastapp.dto;
+package src.main.java.org.example.weatherforecastapp.dto.firstRequest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

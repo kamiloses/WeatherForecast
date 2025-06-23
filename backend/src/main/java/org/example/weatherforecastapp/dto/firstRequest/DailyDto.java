@@ -1,4 +1,4 @@
-package src.main.java.org.example.weatherforecastapp.dto;
+package src.main.java.org.example.weatherforecastapp.dto.firstRequest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -17,10 +17,10 @@ public class DailyDto {
     private List<Integer> weatherCode;
 
     @JsonProperty("temperature_2m_max")
-    private List<Integer> temperatureMax;
+    private List<Double> temperatureMax;
 
     @JsonProperty("temperature_2m_min")
-    private List<Integer> temperatureMin;
+    private List<Double> temperatureMin;
 
     @JsonProperty("sunshine_duration")
     private List<Double> sunshineDuration;

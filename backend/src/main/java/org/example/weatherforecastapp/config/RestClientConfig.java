@@ -11,7 +11,7 @@ public class RestClientConfig {
     @Bean
     public RestClient restClient() {
 
-        return   RestClient.builder()
+        return RestClient.builder()
                 .baseUrl("https://api.open-meteo.com/v1")
                 .build();
     }

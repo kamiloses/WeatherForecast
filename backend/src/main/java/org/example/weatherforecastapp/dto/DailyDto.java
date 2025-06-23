@@ -1,14 +1,15 @@
-package src.main.java.org.example.weatherforecastapp.dto.firstRequest;
+package src.main.java.org.example.weatherforecastapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
+
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
 public class DailyDto {
     @JsonProperty("time")
     private List<String> time;
@@ -24,5 +25,4 @@ public class DailyDto {
 
     @JsonProperty("sunshine_duration")
     private List<Double> sunshineDuration;
-
 }

@@ -8,13 +8,13 @@ import java.util.Date;
 import java.util.List;
 @NoArgsConstructor
 @Getter
-public class HourlyDto {//zmienic nazwe na request v2
+public class HourlyDto {
 
     @JsonProperty("time")
     private List<Date> time;
 
     @JsonProperty("pressure_msl")
-    private List<Double> pressure; //todo zmienić nazwe
+    private List<Double> pressure;
 
 
 
@@ -23,5 +23,5 @@ public class HourlyDto {//zmienic nazwe na request v2
 
 
 
-    //todo 2 pola jewszcze z 2 requesta
+
 }

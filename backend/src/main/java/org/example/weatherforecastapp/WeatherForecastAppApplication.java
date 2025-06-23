@@ -1,4 +1,4 @@
-package org.example.weatherforecastapp;
+package src.main.java.org.example.weatherforecastapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,5 +10,4 @@ public class WeatherForecastAppApplication {
         SpringApplication.run(WeatherForecastAppApplication.class, args);
 
     }
-
 }

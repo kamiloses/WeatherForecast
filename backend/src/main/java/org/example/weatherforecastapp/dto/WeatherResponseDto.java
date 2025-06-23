@@ -1,4 +1,4 @@
-package org.example.weatherforecastapp.dto;
+package src.main.java.org.example.weatherforecastapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -10,3 +10,4 @@ public class WeatherResponseDto {
 
     @JsonProperty("daily")
     private DailyDto daily;}
+

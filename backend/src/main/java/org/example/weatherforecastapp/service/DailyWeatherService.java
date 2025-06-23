@@ -10,6 +10,7 @@ import src.main.java.org.example.weatherforecastapp.exception.RestClientFetching
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Slf4j
@@ -23,10 +24,12 @@ public class DailyWeatherService {
     }
 
 
-    public DailyResponse getDailyWeatherForecast() {
+    public DailyResponse getDailyWeatherForecast(double latitude,double longitude) {
 
         DailyWeatherApiResponseDto dailyWeatherResponse = restClient.get()
-                .uri("/forecast?latitude=52.52&longitude=13.41&daily=weather_code,temperature_2m_max,temperature_2m_min,sunshine_duration")
+                .uri(String.format(Locale.US,
+                        "/forecast?latitude=%f&longitude=%f&daily=weather_code,temperature_2m_max,temperature_2m_min,sunshine_duration",
+                        latitude, longitude))
                 .retrieve().body(DailyWeatherApiResponseDto.class);
 
         if (dailyWeatherResponse == null) {

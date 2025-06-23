@@ -2,13 +2,16 @@ package src.main.java.org.example.weatherforecastapp.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClient;
 import src.main.java.org.example.weatherforecastapp.dto.WeeklyResponse;
 import src.main.java.org.example.weatherforecastapp.dto.WeeklyWeatherApiResponseDto;
 import src.main.java.org.example.weatherforecastapp.exception.RestClientFetchingException;
 
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 @Service
@@ -22,10 +25,12 @@ public class WeeklyWeatherService {
         this.restClient = restClient;
     }
 
-    public WeeklyResponse getWeeklyWeatherForecast() {
+    public WeeklyResponse getWeeklyWeatherForecast(double latitude, double longitude) {
 
         WeeklyWeatherApiResponseDto weeklyWeatherResponse = restClient.get()
-                .uri("/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=pressure_msl,sunshine_duration")
+                .uri(String.format(Locale.US,
+                        "/forecast?latitude=%.6f&longitude=%.6f&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=pressure_msl,sunshine_duration",
+                        latitude, longitude))
                 .retrieve().body(WeeklyWeatherApiResponseDto.class);
         if (weeklyWeatherResponse == null) {
             throw new RestClientFetchingException("There was some problem with fetching data from the external api");

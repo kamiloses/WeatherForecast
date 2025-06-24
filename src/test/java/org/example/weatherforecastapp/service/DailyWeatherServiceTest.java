@@ -1,28 +1,37 @@
 package org.example.weatherforecastapp.service;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
-//@WireMockTest(httpPort = 8081)
 class DailyWeatherServiceTest {
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/energy_calculation_cases.csv", numLinesToSkip = 1, delimiter = '\t')
+    public void should_calculate_energyKWh_from_csv(String sunshineDurationsCsv, String expectedEnergyCsv) {
+        List<Double> sunshineDurations = parseCsvToDoubleList(sunshineDurationsCsv);
+        List<Double> expectedEnergy = parseCsvToDoubleList(expectedEnergyCsv);
+
+        List<Double> result = DailyWeatherService.calculateEnergyKWh(sunshineDurations);
+
+        assertEquals(expectedEnergy, result);
+    }
 
 
-
-        @Test public void should_calculate_EnergyKWh(){
-
-            List<Double> sunshineDurations = List.of(1.0, 1800.0, 3600.0, 7200.0, 0.0);
-            List<Double> expected = List.of(0.0, 0.3, 0.5, 1.0, 0.0);
-
-            List<Double> result = DailyWeatherService.calculateEnergyKWh(sunshineDurations);
-
-            assertEquals(expected, result);
-        }
+    private List<Double> parseCsvToDoubleList(String csv) {
+        return Arrays.stream(csv.replace("\"", "").split(";"))
+                .map(String::trim)
+                .map(Double::parseDouble)
+                .collect(Collectors.toList());
 
 
-        }
+    }
+
+}
+
+

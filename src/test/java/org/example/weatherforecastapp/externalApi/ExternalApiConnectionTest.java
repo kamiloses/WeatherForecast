@@ -31,22 +31,30 @@ public class ExternalApiConnectionTest {
                 .retrieve().body(DailyWeatherApiResponseDto.class);
 
 
-        System.out.println(response);
-        assertNotNull(response);
+
+        assertNotNull(response.getDaily().getTime());
+        assertNotNull(response.getDaily().getWeatherCode());
+        assertNotNull(response.getDaily().getTemperatureMax());
+        assertNotNull(response.getDaily().getTemperatureMin());
+        assertNotNull(response.getDaily().getSunshineDuration());
 
     }
 
     @Test
     public void testSecondExternalEndpoint() {
-        var response = restClient.get()
-                .uri("https://api.open-meteo.com/v1/forecast?latitude=%.6f&longitude=%.6f&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=pressure_msl,sunshine_duration")
-                .retrieve()
-                .body(WeeklyWeatherApiResponseDto.class);
+       var response=restClient.get()
+                .uri(String.format(Locale.US,
+                        "/forecast?latitude=%.6f&longitude=%.6f&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=pressure_msl,sunshine_duration",
+                        latitude, longitude))
+                .retrieve().body(WeeklyWeatherApiResponseDto.class);
 
 
-        System.out.println(response);
-        assertNotNull(response);
-
+        assertNotNull(response.getDaily().getTime());
+        assertNotNull(response.getDaily().getWeatherCode());
+        assertNotNull(response.getDaily().getTemperatureMax());
+        assertNotNull(response.getDaily().getTemperatureMin());
+        assertNotNull(response.getHourly().getPressure());
+        assertNotNull(response.getHourly().getSunshineDuration());
 
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/weather")
 public class WeatherController {
 
-    //TODO WALIDACJA TESTY DYNAMICZNE ENDPOINTY
+
     private final DailyWeatherService dailyWeatherService;
     private final WeeklyWeatherService weeklyWeatherService;
 
@@ -33,8 +33,7 @@ public class WeatherController {
     @GetMapping("/weekly")
     public WeeklyResponse getWeeklyResponse(@RequestParam double latitude, @RequestParam double longitude) {
 
-         latitude = 52.52;
-         longitude = 13.41;
+
 
         return weeklyWeatherService.getWeeklyWeatherForecast(latitude, longitude);
 

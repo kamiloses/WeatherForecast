@@ -52,7 +52,7 @@ public class WeeklyWeatherService {
     }
 
 
-    //TODO UPEWNIJ SIĘ CZY DZIAŁA POPRAWNIE
+
     private static double getWeeklyAverageSunshineHour(WeeklyWeatherApiResponseDto weatherResponse) {
         List<Double> durationsInSeconds = weatherResponse.getHourly().getSunshineDuration();
         double sumSeconds = durationsInSeconds.stream().mapToDouble(Double::doubleValue).sum();

@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.example.weatherforecastapp.dto.DailyResponse;
 import org.example.weatherforecastapp.dto.WeeklyResponse;
+import org.example.weatherforecastapp.service.DailyWeatherService;
+import org.example.weatherforecastapp.service.WeeklyWeatherService;
 import org.example.weatherforecastapp.service.impl.DailyWeatherServiceImpl;
 import org.example.weatherforecastapp.service.impl.WeeklyWeatherServiceImpl;
 import org.springframework.validation.annotation.Validated;
@@ -16,12 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class WeatherController {
 
 
-    private final DailyWeatherServiceImpl dailyWeatherServiceImpl;
-    private final WeeklyWeatherServiceImpl weeklyWeatherServiceImpl;
+    private final DailyWeatherService dailyWeatherService;
+    private final WeeklyWeatherService weeklyWeatherService;
 
-    public WeatherController(DailyWeatherServiceImpl dailyWeatherServiceImpl, WeeklyWeatherServiceImpl weeklyWeatherServiceImpl) {
-        this.dailyWeatherServiceImpl = dailyWeatherServiceImpl;
-        this.weeklyWeatherServiceImpl = weeklyWeatherServiceImpl;
+    public WeatherController(DailyWeatherService dailyWeatherService, WeeklyWeatherService weeklyWeatherService) {
+        this.dailyWeatherService = dailyWeatherService;
+        this.weeklyWeatherService = weeklyWeatherService;
     }
 
 
@@ -30,7 +32,7 @@ public class WeatherController {
                                           @RequestParam @Min(-180) @Max(180) double longitude) {
 
 
-        return dailyWeatherServiceImpl.getDailyWeatherForecast(latitude, longitude);
+        return dailyWeatherService.getDailyWeatherForecast(latitude, longitude);
     }
 
 
@@ -39,7 +41,7 @@ public class WeatherController {
                                             @RequestParam @Min(-180) @Max(180) double longitude) {
 
 
-        return weeklyWeatherServiceImpl.getWeeklyWeatherForecast(latitude, longitude);
+        return weeklyWeatherService.getWeeklyWeatherForecast(latitude, longitude);
 
     }
 

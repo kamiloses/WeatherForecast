@@ -39,6 +39,13 @@ public class WeeklyWeatherServiceImpl implements WeeklyWeatherService {
     }
 
     @Override
+    public WeeklyResponse getWeeklyWeatherForecast(double latitude, double longitude) {
+        WeeklyWeatherApiResponseDto apiResponse = fetchWeeklyWeatherData(latitude, longitude);
+        return mapToWeeklyResponse(apiResponse);
+    }
+
+
+
     public WeeklyResponse mapToWeeklyResponse(WeeklyWeatherApiResponseDto weeklyWeatherResponse) {
         return new WeeklyResponse(
                 computeAveragePressure(weeklyWeatherResponse),
@@ -49,19 +56,14 @@ public class WeeklyWeatherServiceImpl implements WeeklyWeatherService {
         );
     }
 
-    public WeeklyResponse getWeeklyWeatherForecast(double latitude, double longitude) {
-        WeeklyWeatherApiResponseDto apiResponse = fetchWeeklyWeatherData(latitude, longitude);
-        return mapToWeeklyResponse(apiResponse);
-    }
-
-    private static int computeAveragePressure(WeeklyWeatherApiResponseDto weatherResponse) {
+    public static int computeAveragePressure(WeeklyWeatherApiResponseDto weatherResponse) {
         double sum = weatherResponse.getHourly().getPressure().stream().mapToDouble(Double::doubleValue).sum();
         int size = weatherResponse.getHourly().getPressure().size();
         double averagePressure = sum / size;
         return (int) Math.round(averagePressure);
     }
 
-    private static double getWeeklyAverageSunshineHour(WeeklyWeatherApiResponseDto weatherResponse) {
+    public static double getWeeklyAverageSunshineHour(WeeklyWeatherApiResponseDto weatherResponse) {
         List<Double> durationsInSeconds = weatherResponse.getHourly().getSunshineDuration();
         double sumSeconds = durationsInSeconds.stream().mapToDouble(Double::doubleValue).sum();
         double totalHours = sumSeconds / 3600.0;
@@ -69,17 +71,17 @@ public class WeeklyWeatherServiceImpl implements WeeklyWeatherService {
         return Math.round(averageHoursPerDay * 10) / 10.0;
     }
 
-    private static double getMinTemperaturePerWeek(WeeklyWeatherApiResponseDto weeklyWeatherApiResponseDto) {
+    public static double getMinTemperaturePerWeek(WeeklyWeatherApiResponseDto weeklyWeatherApiResponseDto) {
         List<Double> temperatureMin = weeklyWeatherApiResponseDto.getDaily().getTemperatureMin();
         return Collections.min(temperatureMin);
     }
 
-    private static double getMaxTemperaturePerWeek(WeeklyWeatherApiResponseDto weeklyWeatherApiResponseDto) {
+    public static double getMaxTemperaturePerWeek(WeeklyWeatherApiResponseDto weeklyWeatherApiResponseDto) {
         List<Double> temperatureMax = weeklyWeatherApiResponseDto.getDaily().getTemperatureMax();
         return Collections.max(temperatureMax);
     }
 
-    private static String summarizeWeekByRain(List<Integer> weatherCodes) {
+    public static String summarizeWeekByRain(List<Integer> weatherCodes) {
         int rainDays = 0;
         Set<Integer> rainCodes = Set.of(51, 53, 55, 61, 63, 65, 80, 81, 82);
         for (Integer code : weatherCodes) {
